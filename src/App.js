@@ -16,13 +16,15 @@ function App() {
     setBoard(temp)
     setXplayer(!xPlayer)
   }
+  const winner = caculateWinner(board)
   return (
     
-    <div>
+    <Container>
+      {winner ? <h3>Win: {winner}</h3> : null}
       <Board>
      {board.map((item, index) => <Square value={item} handlePlay={handlePlay} index={index} key={index}/>)}
     </Board>
-    </div>
+    </Container>
 
   )
 }
@@ -39,10 +41,20 @@ const caculateWinner = (board) =>{
     [2, 4, 6],
   ]
   for(let i = 0; i< winline.length; i++){
-    const [a, b, c] = winline(i)
-    if(board[a] && board[a] === board[b] && board[a] === board[c])
+    const [a, b, c] = winline[i]
+    if(board[a] && board[a] === board[b] && board[a] === board[c]){
+    return board[a]
+    }
   }
+  return 
 }
+const Container = styled.div `
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: green;
+`
 
 const Board = styled.div`
   display: grid;
