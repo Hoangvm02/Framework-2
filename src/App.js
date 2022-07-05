@@ -6,6 +6,7 @@ import Square from './components/square';
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [xPlayer, setXplayer] = useState(true)
+  
   const handlePlay = (index) => {
     const temp = board.slice()
     if(xPlayer){
@@ -17,15 +18,18 @@ function App() {
     setXplayer(!xPlayer)
   }
   const winner = caculateWinner(board)
+  console.log(board);
   return (
     
     <Container>
       {winner ? <h3>Win: {winner}</h3> : null}
       <Board>
-     {board.map((item, index) => <Square value={item} handlePlay={handlePlay} index={index} key={index}/>)}
+     {board.map((item, index) => <Square value={item} handlePlay={handlePlay} winnerGame={winner} index={index} key={index}/>)}
     </Board>
+    <div>
+      <button className="reset"  >Reset</button>
+    </div>
     </Container>
-
   )
 }
 
@@ -43,11 +47,12 @@ const caculateWinner = (board) =>{
   for(let i = 0; i< winline.length; i++){
     const [a, b, c] = winline[i]
     if(board[a] && board[a] === board[b] && board[a] === board[c]){
-    return board[a]
+    return board[a]  
     }
   }
   return 
 }
+
 const Container = styled.div `
   display:flex;
   flex-direction: column;
