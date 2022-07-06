@@ -27,7 +27,7 @@ function App() {
      {board.map((item, index) => <Square value={item} handlePlay={handlePlay} winnerGame={winner} index={index} key={index}/>)}
     </Board>
     <div>
-      <button className="reset"  >Reset</button>
+      <a href="/">Reset</a>
     </div>
     </Container>
   )
