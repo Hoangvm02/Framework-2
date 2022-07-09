@@ -17,6 +17,9 @@ function App() {
     setBoard(temp)
     setXplayer(!xPlayer)
   }
+  const reset = () => {
+    setBoard(Array(9).fill(null))
+  }
   const winner = caculateWinner(board)
   console.log(board);
   return (
@@ -27,7 +30,7 @@ function App() {
      {board.map((item, index) => <Square value={item} handlePlay={handlePlay} winnerGame={winner} index={index} key={index}/>)}
     </Board>
     <div>
-      <a href="/">Reset</a>
+      <button  onClick={() => reset()}>Reset</button>
     </div>
     </Container>
   )
@@ -69,6 +72,4 @@ const Board = styled.div`
   max-width: 200px;
   
 `
-
-
 export default App;
